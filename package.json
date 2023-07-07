@@ -1,7 +1,7 @@
 {
-  "name": "react-nexon",
+  "name": "react-project",
   "version": "0.1.0",
-  "homepage": "http://kimminkum.github.io/react-nexon/",
+  "homepage": "http://kimminkum.github.io/react-project/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -20,6 +20,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.0.2",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
