@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 
 import imgLogo from "../image/logo.png";
 import styled from "styled-components";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 interface HeaderProps {
   windowWidth: number;
@@ -31,8 +31,17 @@ const HeaderMb = styled.div<{ active: boolean }>`
   top: 0;
   display: ${(props) => (props.active ? "flex" : "none")};
 `;
+const InnerBoxMb = styled.div`
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  align-items: center;
+`;
 
-const Div = styled.div``;
+const BarBox = styled.div`
+  font-size: 1.5rem;
+  cursor: pointer;
+`;
 
 const HeaderImgPc = styled.img`
   width: 260px;
@@ -116,26 +125,18 @@ const Header: React.FC<HeaderProps> = ({ windowWidth, onToggle }) => {
         </HeaderPc>
       )}
       {windowWidth < 1200 && (
-        <HeaderMb active={hideHeader} className="flex_sb">
-          <Link to="/">
-            <div>
-              <HeaderImgMb src={imgLogo} alt="" />
-            </div>
-          </Link>
+        <HeaderMb active={hideHeader}>
+          <InnerBoxMb className="flex_sb">
+            <Link to="/">
+              <div>
+                <HeaderImgMb src={imgLogo} alt="" />
+              </div>
+            </Link>
 
-          <div className="flex_end">
-            <Pcnav className="flex_end">
-              <PcnavList>
-                <Link to="/">서비스 소개</Link>
-              </PcnavList>
-              <PcnavList>
-                <Link to="/">회사 소개</Link>
-              </PcnavList>
-              <PcnavList>
-                <Link to="/">무료 견적 받아보기</Link>
-              </PcnavList>
-            </Pcnav>
-          </div>
+            <BarBox className="flex_end">
+              <FontAwesomeIcon icon={faBars} />
+            </BarBox>
+          </InnerBoxMb>
         </HeaderMb>
       )}
     </div>

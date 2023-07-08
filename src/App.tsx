@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./routes/Header";
+import Footer from "./routes/Footer";
 
 function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -33,8 +34,8 @@ function App() {
           onToggle={handleToggle}
           windowWidth={windowWidth}
         />
-        {/* 
-        {!isNavToggle && (
+
+        {/* {!isNavToggle && (
           <Routes>
             <Route
               path="/"
@@ -61,12 +62,12 @@ function App() {
               element={<Contact windowWidth={windowWidth} />}
             ></Route>
           </Routes>
-        )}
+        )} */}
 
-        {isNavToggle && (
+        {/* {isNavToggle && (
           <Nav isNavToggle={isNavToggle} onToggle={handleToggle}></Nav>
-        )}
-        <Footer onToggle={handleToggle} windowWidth={windowWidth} /> */}
+        )} */}
+        <Footer onToggle={handleToggle} windowWidth={windowWidth} />
       </BrowserRouter>
     </div>
   );
