@@ -4,6 +4,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Header from "./routes/Header";
 import Footer from "./routes/Footer";
+import Main from "./routes/Main";
 
 function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -35,13 +36,13 @@ function App() {
           windowWidth={windowWidth}
         />
 
-        {/* {!isNavToggle && (
+        {!isNavToggle && (
           <Routes>
             <Route
               path="/"
               element={<Main windowWidth={windowWidth} />}
             ></Route>
-            <Route
+            {/* <Route
               path="/about/*"
               element={<About windowWidth={windowWidth} />}
             ></Route>
@@ -60,9 +61,9 @@ function App() {
             <Route
               path="/contact"
               element={<Contact windowWidth={windowWidth} />}
-            ></Route>
+            ></Route> */}
           </Routes>
-        )} */}
+        )}
 
         {/* {isNavToggle && (
           <Nav isNavToggle={isNavToggle} onToggle={handleToggle}></Nav>

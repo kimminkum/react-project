@@ -15,9 +15,11 @@ interface HeaderProps {
 const HeaderPc = styled.div<{ active: boolean }>`
   width: 100%;
   padding: 10px 0;
-  position: absolute;
+  position: fixed;
   top: 0;
   display: ${(props) => (props.active ? "block" : "none")};
+  z-index: 5;
+  background-color: white;
 `;
 const InnerBox = styled.div`
   width: 1200px;
@@ -27,9 +29,11 @@ const InnerBox = styled.div`
 const HeaderMb = styled.div<{ active: boolean }>`
   width: 100%;
   padding: 20px;
-  position: absolute;
+  position: fixed;
   top: 0;
   display: ${(props) => (props.active ? "flex" : "none")};
+  z-index: 5;
+  background-color: white;
 `;
 const InnerBoxMb = styled.div`
   width: 100%;
@@ -71,7 +75,7 @@ const PcnavList = styled.li`
 
 const Header: React.FC<HeaderProps> = ({ windowWidth, onToggle }) => {
   const [mbButton, setMbButton] = useState<boolean>(false);
-  const [hideHeader, setHideHeader] = useState<boolean>(true);
+  const [hideHeader, setHideHeader] = useState<boolean>(false);
 
   useEffect(() => {
     // 이전 스크롤 위치를 저장하는 변수

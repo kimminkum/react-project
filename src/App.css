@@ -24,6 +24,7 @@ h5,
 h6,
 p {
   color: inherit;
+  letter-spacing: -.75px;
 }
 
 h1 {
@@ -103,4 +104,29 @@ ul {
 .flex_center {
   display: flex;
   justify-content: center;
+}
+
+@keyframes fade_in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* slick */
+.slick-slider {
+  display: block;
+  position: relative;
+}
+
+.slick-list {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
