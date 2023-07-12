@@ -179,3 +179,17 @@ ul {
   line-height: 1.5;
   letter-spacing: normal;
 }
+
+.p5 {
+  color: #222;
+  font-family: NotoSans;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+@media screen and (min-width: 1200px) {
+  .p5 {
+    font-size: 24px;
+  }
+}

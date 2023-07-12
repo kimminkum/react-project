@@ -89,7 +89,6 @@ const H4 = styled.h4`
   letter-spacing: -2px;
   margin-top: 20px;
   font-weight: bold;
-  font-stretch: normal;
   line-height: 1.5;
   ${({ theme }) => css`
     @media (min-width: 720px) {
@@ -212,7 +211,7 @@ const Circle = styled.div<{ light: boolean }>`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  color: var(--global-white-a-100);
+  color: #fff;
   font-size: 20px;
   font-weight: bold;
   line-height: 1.5;
@@ -348,6 +347,139 @@ const SpanSub = styled.span`
       width: 100%;
     }
   `}
+`;
+const GridBox = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  `};
+`;
+
+const Advantages = styled.div`
+  background-color: rgba(119, 196, 198, 0.24);
+  margin-top: 97px;
+  padding-top: 62px;
+  padding-bottom: 60px;
+`;
+const AdvantagesBox = styled.div`
+  width: 100%;
+  padding: 24px;
+  margin-bottom: 8px;
+  border-radius: 16px;
+  background-color: #fff;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      box-shadow: 0 6px 10px 6px rgba(0, 0, 0, 0.04),
+        0 2px 10px 0 rgba(0, 0, 0, 0.06);
+    }
+  `};
+`;
+const ImgIcon = styled.img`
+  width: 48px;
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+`;
+const AdvantagesP = styled.p<{ active: boolean }>`
+  margin-top: ${(props) => (props.active ? "24px" : "8px")};
+  color: ${(props) => (props.active ? "#222" : "rgba(34, 34, 34, 0.71)")};
+  font-size: ${(props) => (props.active ? "16px" : "14px")};
+  font-weight: bold;
+  line-height: 1.5;
+  ${({ theme, active }) => css`
+    @media (min-width: 1200px) {
+      font-size: ${active ? "20px" : "16px"};
+    }
+  `};
+`;
+
+const Button2 = styled.button`
+  width: 100%;
+  height: 56px;
+  margin: 36px 0;
+  background-color: #007d7c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border-radius: 28px;
+  font-size: 16px;
+  font-weight: bold;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      width: 164px;
+    }
+  `};
+`;
+const OfflineContents = styled.ul`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      width: 780px;
+      height: 172px;
+      justify-content: flex-end;
+    }
+  `};
+`;
+const OfflineBox = styled.li`
+  width: 100%;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border: solid 2px #3bacae;
+  background-color: #fff;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      width: 254px;
+      padding: 24px 32px;
+      justify-content: flex-end;
+    }
+  `};
+`;
+
+const OfflineImg = styled.img`
+  width: 82px;
+  margin-right: 28px;
+  margin-top: 16px;
+`;
+
+const LocationRow = styled.div`
+  display: flex;
+  margin-top: 16px;
+  align-items: center;
+`;
+
+const LocationImg = styled.img`
+  width: 24px;
+  margin-right: 4px;
+`;
+
+const ArticleGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  `};
+`;
+const ItemContainer = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
 const Main: React.FC<MainProps> = ({ windowWidth }) => {
@@ -567,7 +699,121 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
               </OnlineBox>
             </PcFlexDiv>
           </div>
+          <Line></Line>
         </InnerBox>
+        <Advantages>
+          <InnerBox>
+            <PcFlexDiv>
+              <Div>
+                <H2>
+                  편한 곳에서,
+                  <br />
+                  익명으로
+                  <br />
+                  신속하게
+                </H2>
+                <P>익명 커뮤니티 기반으로 즉시성과 접근성을 담보합니다.</P>
+              </Div>
+              <RightDiv>
+                <GridBox>
+                  <AdvantagesBox>
+                    <ImgIcon src="https://eap.mindcafe.co.kr/images/main/section-04-advantage-icon-01.png" />
+                    <AdvantagesP active={true}>익명성</AdvantagesP>
+                    <AdvantagesP active={false}>
+                      암호화 및 보안 강화로 익명성과 안정성을 확보합니다.
+                    </AdvantagesP>
+                  </AdvantagesBox>
+                  <AdvantagesBox>
+                    <ImgIcon src="https://eap.mindcafe.co.kr/images/main/section-04-advantage-icon-062.png" />
+                    <AdvantagesP active={true}>즉시성</AdvantagesP>
+                    <AdvantagesP active={false}>
+                      바로 상담 서비스가 가능하며, 즉각적 효과를 제공합니다.
+                    </AdvantagesP>
+                  </AdvantagesBox>
+                  <AdvantagesBox>
+                    <ImgIcon src="https://eap.mindcafe.co.kr/images/main/section04-advantage-icon03.png" />
+                    <AdvantagesP active={true}>접근성</AdvantagesP>
+                    <AdvantagesP active={false}>
+                      원하는 시간과 장소에서 제약 없이 이용 가능합니다.
+                    </AdvantagesP>
+                  </AdvantagesBox>
+                  <AdvantagesBox>
+                    <ImgIcon src="https://eap.mindcafe.co.kr/images/main/section-04-advantage-icon-04.png" />
+                    <AdvantagesP active={true}>기술성</AdvantagesP>
+                    <AdvantagesP active={false}>
+                      빅데이터 기술로 시각화, 통계화된 분석을 제공합니다.
+                    </AdvantagesP>
+                  </AdvantagesBox>
+                  <AdvantagesBox>
+                    <ImgIcon src="https://eap.mindcafe.co.kr/images/main/section-04-advantage-icon-05.png" />
+                    <AdvantagesP active={true}>경제성</AdvantagesP>
+                    <AdvantagesP active={false}>
+                      기업에게 더 합리적인 가격으로 서비스를 제공합니다.
+                    </AdvantagesP>
+                  </AdvantagesBox>
+                  <AdvantagesBox>
+                    <ImgIcon src="https://eap.mindcafe.co.kr/images/main/section-04-advantage-icon-06.png" />
+                    <AdvantagesP active={true}>전문성</AdvantagesP>
+                    <AdvantagesP active={false}>
+                      엄격한 전문가 선발 및 전문성관리 시스템을 구축했습니다.
+                    </AdvantagesP>
+                  </AdvantagesBox>
+                </GridBox>
+              </RightDiv>
+            </PcFlexDiv>
+          </InnerBox>
+        </Advantages>
+        <Article>
+          <InnerBox>
+            <PcFlexDiv>
+              <Div>
+                <H2>오프라인 서비스</H2>
+                <P>
+                  국내 최대 규모의 직영 센터와 전국 500여개의 협약센터를
+                  보유하고 있습니다.
+                </P>
+                <Button2>직영센터 둘러보기</Button2>
+              </Div>
+              <OfflineContents>
+                <OfflineBox>
+                  <p className="p5">고위험군 정신과 진료연계</p>
+                  <OfflineImg src="https://eap.mindcafe.co.kr/images/main/section-05-hospital-01.png" />
+                  <OfflineImg src="https://eap.mindcafe.co.kr/images/main/section-05-hospital-02.png" />
+                  <OfflineImg src="https://eap.mindcafe.co.kr/images/main/section-05-hospital-03.png" />
+                  <OfflineImg src="https://eap.mindcafe.co.kr/images/main/section-05-hospital-04.png" />
+                </OfflineBox>
+                <OfflineBox>
+                  <p className="p5">고위험군 정신과 진료연계</p>
+                  <div>
+                    <LocationRow>
+                      <LocationImg src="https://eap.mindcafe.co.kr/images/common/location.png" />
+                      <p style={{ color: "#222" }}>
+                        경기도 성남시 황새울로 214번길 8
+                      </p>
+                    </LocationRow>
+                    <LocationRow>
+                      <LocationImg src="https://eap.mindcafe.co.kr/images/common/location.png" />
+                      <p style={{ color: "#222" }}>
+                        서울특별시 용산구 장문로 23
+                      </p>
+                    </LocationRow>
+                  </div>
+                </OfflineBox>
+              </OfflineContents>
+            </PcFlexDiv>
+          </InnerBox>
+        </Article>
+
+        <ArticleGrid>
+          <ItemContainer></ItemContainer>
+          <ItemContainer></ItemContainer>
+          <ItemContainer></ItemContainer>
+          <ItemContainer></ItemContainer>
+          <ItemContainer></ItemContainer>
+          <ItemContainer></ItemContainer>
+          <ItemContainer></ItemContainer>
+          <ItemContainer></ItemContainer>
+        </ArticleGrid>
       </Article>
     </div>
   );
