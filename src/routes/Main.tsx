@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import NextArrows from "../components/NextArrows";
+import PrevArrows from "../components/PrevArrows";
 
 interface MainProps {
   windowWidth: number;
@@ -120,6 +123,17 @@ const Article = styled.article`
   ${({ theme }) => css`
     @media (min-width: 1200px) {
       padding: 0;
+    }
+  `}
+`;
+const Article2 = styled.article`
+  margin: 30px 0;
+  padding: 30px 0;
+  background-color: rgba(119, 196, 198, 0.24);
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      padding: 0;
+      background-color: #fff;
     }
   `}
 `;
@@ -612,7 +626,81 @@ const SpecialLi = styled.li`
   `};
 `;
 
+const SlickDiv = styled.div`
+  position: relative;
+  width: 100%;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      padding: 0 50px;
+    }
+  `};
+`;
+
+const ExpertBox = styled.div`
+  width: 100%;
+  display: inline-block;
+  padding: 8px 4px;
+`;
+const ExpertWrapper = styled.div`
+  height: auto;
+  border-radius: 16px;
+  padding: 20px;
+  height: 252px;
+  background-color: #fff
+    ${({ theme }) => css`
+      @media (min-width: 1200px) {
+        box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.04),
+          0 1px 8px 0 rgba(0, 0, 0, 0.08);
+      }
+    `};
+`;
+const ExpertTop = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+`;
+const ExpertBottom = styled.div`
+  border-top: 1px solid #ddd;
+`;
+
+const ExpertObj = styled.div`
+  font-size: 11px;
+  line-height: 1.5;
+  border-radius: 12px;
+  border: 1px solid #bbb;
+  padding: 4px 8px;
+  margin-right: 4px;
+  color: #aaa;
+`;
+
 const Main: React.FC<MainProps> = ({ windowWidth }) => {
+  const sliderRef = useRef(null);
+  const [slidesToShow1, setSlidesToShow1] = useState<number>(4);
+  const [slidesToShow2, setSlidesToShow2] = useState<number>(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 560) {
+        setSlidesToShow1(1);
+      } else if (window.innerWidth <= 720) {
+        setSlidesToShow1(2);
+        setSlidesToShow2(1);
+      } else if (window.innerWidth <= 1200) {
+        setSlidesToShow1(3);
+        setSlidesToShow2(2);
+      } else {
+        setSlidesToShow1(4);
+        setSlidesToShow2(3);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const settings = {
     infinite: true,
     autoplay: true,
@@ -647,9 +735,23 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
   };
   const settings3 = {
     autoplay: false,
-    slidesToShow: 3,
-    arrow: false,
+    slidesToShow: slidesToShow2,
+    arrows: false,
     loop: true
+  };
+  const settings4 = {
+    slidesToShow: slidesToShow1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    loop: true,
+    arrows: false
+  };
+  const handlePrev = () => {
+    (sliderRef.current as any).slickPrev(); // 슬라이드 이전으로 이동
+  };
+
+  const handleNext = () => {
+    (sliderRef.current as any).slickNext(); // 슬라이드 다음으로 이동
   };
 
   return (
@@ -1126,10 +1228,11 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
           </MtDiv>
         </InnerBox>
       </Article>
-      <Article>
+
+      <Article2>
         <InnerBox>
           <PcFlexDiv>
-            <div>
+            <div style={{ marginBottom: "20px" }}>
               <H2>1,000명의 상담·코칭 전문가 보유</H2>
               <P>
                 엄격한 선발기준과 특화된 교육을 통해 최상의 서비스를 제공합니다
@@ -1141,11 +1244,149 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
               </a>
             </Div>
           </PcFlexDiv>
-          <div>
-            <Slider></Slider>
-          </div>
+          <SlickDiv>
+            <Slider {...settings4} ref={sliderRef} className="around">
+              <div>
+                <ExpertBox>
+                  <ExpertWrapper>
+                    <ExpertTop>
+                      <img
+                        src="https://eap.mindcafe.co.kr/images/main/section-07-coach-01.png"
+                        alt=""
+                      />
+                      <div style={{ marginLeft: "12px" }}>
+                        <p className="name">임그린 코치</p>
+                        <p className="career">전문 경력 10년 +</p>
+                        <div className="flex_center">
+                          <ExpertObj>#대인관계</ExpertObj>
+                          <ExpertObj>#목표달성</ExpertObj>
+                        </div>
+                      </div>
+                    </ExpertTop>
+                    <ExpertBottom>
+                      <p className="name">간략한 자기소개</p>
+                      <p className="WebBody1" style={{ fontSize: "14px" }}>
+                        구체적인 새로운 역할 변화를 위한 행동과 원칙을 결정할 수
+                        있어요. 탁월한 인생을 살아보세요.
+                      </p>
+                    </ExpertBottom>
+                  </ExpertWrapper>
+                </ExpertBox>
+              </div>
+              <div>
+                <ExpertBox>
+                  <ExpertWrapper>
+                    <ExpertTop>
+                      <img
+                        src="https://eap.mindcafe.co.kr/images/main/section-07-coach-02.png"
+                        alt=""
+                      />
+                      <div style={{ marginLeft: "12px" }}>
+                        <p className="name">남윤정 코치</p>
+                        <p className="career">전문 경력 4년 +</p>
+                        <div className="flex_center">
+                          <ExpertObj>#자존감</ExpertObj>
+                          <ExpertObj>#실행력</ExpertObj>
+                        </div>
+                      </div>
+                    </ExpertTop>
+                    <ExpertBottom>
+                      <p className="name">간략한 자기소개</p>
+                      <p className="WebBody1" style={{ fontSize: "14px" }}>
+                        코치는 당신의 잠재력과 창의력, 가능성을 불러 일으키고
+                        한발 더 나아가는 여정을 함께 합니다.
+                      </p>
+                    </ExpertBottom>
+                  </ExpertWrapper>
+                </ExpertBox>
+              </div>
+              <div>
+                <ExpertBox>
+                  <ExpertWrapper>
+                    <ExpertTop>
+                      <img
+                        src="https://eap.mindcafe.co.kr/images/main/section-07-coach-03.png"
+                        alt=""
+                      />
+                      <div style={{ marginLeft: "12px" }}>
+                        <p className="name">이영애 코치</p>
+                        <p className="career">전문 경력 10년 +</p>
+                        <div className="flex_center">
+                          <ExpertObj>#의사소통</ExpertObj>
+                          <ExpertObj>#갈등관리</ExpertObj>
+                        </div>
+                      </div>
+                    </ExpertTop>
+                    <ExpertBottom>
+                      <p className="name">간략한 자기소개</p>
+                      <p className="WebBody1" style={{ fontSize: "14px" }}>
+                        자신이 디자인한 삶을 위한 변화와 성장을 함께
+                        만들어갑니다.
+                      </p>
+                    </ExpertBottom>
+                  </ExpertWrapper>
+                </ExpertBox>
+              </div>
+              <div>
+                <ExpertBox>
+                  <ExpertWrapper>
+                    <ExpertTop>
+                      <img
+                        src="https://eap.mindcafe.co.kr/images/main/section-07-coach-04.png"
+                        alt=""
+                      />
+                      <div style={{ marginLeft: "12px" }}>
+                        <p className="name">김수연 코치</p>
+                        <p className="career">전문 경력 9년 +</p>
+                        <div className="flex_center">
+                          <ExpertObj>#자존감</ExpertObj>
+                          <ExpertObj>#부모코칭</ExpertObj>
+                        </div>
+                      </div>
+                    </ExpertTop>
+                    <ExpertBottom>
+                      <p className="name">간략한 자기소개</p>
+                      <p className="WebBody1" style={{ fontSize: "14px" }}>
+                        나의 감정과 욕구, 가치를 명료화하여 목적이 인도하는 삶을
+                        살아갈 수 있도록 지원합니다.
+                      </p>
+                    </ExpertBottom>
+                  </ExpertWrapper>
+                </ExpertBox>
+              </div>
+              <div>
+                <ExpertBox>
+                  <ExpertWrapper>
+                    <ExpertTop>
+                      <img
+                        src="https://eap.mindcafe.co.kr/images/main/section-07-coach-05.png"
+                        alt=""
+                      />
+                      <div style={{ marginLeft: "12px" }}>
+                        <p className="name">이정아 코치</p>
+                        <p className="career">전문 경력 8년 +</p>
+                        <div className="flex_center">
+                          <ExpertObj>#비즈니스</ExpertObj>
+                          <ExpertObj>#커리어</ExpertObj>
+                        </div>
+                      </div>
+                    </ExpertTop>
+                    <ExpertBottom>
+                      <p className="name">간략한 자기소개</p>
+                      <p className="WebBody1" style={{ fontSize: "14px" }}>
+                        내 마음을 온전히 터놓고 함께 나눌 수 있는 ‘나만의
+                        안전지대'가 되어드리는 전문코치입니다.
+                      </p>
+                    </ExpertBottom>
+                  </ExpertWrapper>
+                </ExpertBox>
+              </div>
+            </Slider>
+            {windowWidth > 1200 && <NextArrows onClickNext={handleNext} />}
+            {windowWidth > 1200 && <PrevArrows onClickPrev={handlePrev} />}
+          </SlickDiv>
         </InnerBox>
-      </Article>
+      </Article2>
     </div>
   );
 };
