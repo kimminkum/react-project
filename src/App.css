@@ -188,8 +188,43 @@ ul {
   line-height: 1.5;
 }
 
+.p6 {
+  margin-bottom: 4px;
+  color: #00433e;
+  line-height: 1.5;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.slick-slider.widthfull {
+  width: 100vw;
+}
+
+.slick-slider.widthfull .slick-list {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.slick-slider.widthfull .slick-list .slick-track {
+  opacity: 1;
+  width: 30000px;
+  transform: translate3d(-15%, 0px, 0px);
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  -webkit-perspective: 1000px;
+}
+
 @media screen and (min-width: 1200px) {
   .p5 {
     font-size: 24px;
+  }
+  .p6 {
+    margin-bottom: 8px;
+    font-size: 20px;
   }
 }

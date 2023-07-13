@@ -421,12 +421,12 @@ const OfflineContents = styled.ul`
   height: 100%;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   ${({ theme }) => css`
     @media (min-width: 1200px) {
       width: 780px;
       height: 172px;
       justify-content: flex-end;
+      flex-direction: row;
     }
   `};
 `;
@@ -438,14 +438,18 @@ const OfflineBox = styled.li`
   justify-content: center;
   align-items: center;
   border-radius: 16px;
+  margin-top: 24px;
   box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   border: solid 2px #3bacae;
   background-color: #fff;
   ${({ theme }) => css`
     @media (min-width: 1200px) {
-      width: 254px;
+      width: 310px;
       padding: 24px 32px;
-      justify-content: flex-end;
+      height: 270px;
+      justify-content: flex-start;
+      margin-top: 0;
+      margin-left: 24px;
     }
   `};
 `;
@@ -472,7 +476,7 @@ const ArticleGrid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 0;
   ${({ theme }) => css`
-    @media (min-width: 1200px) {
+    @media (min-width: 960px) {
       grid-template-columns: repeat(4, 1fr);
     }
   `};
@@ -480,6 +484,132 @@ const ArticleGrid = styled.div`
 const ItemContainer = styled.div`
   position: relative;
   width: 100%;
+
+  &:hover {
+    > div {
+      opacity: 1;
+    }
+  }
+`;
+
+const ItemImg = styled.img`
+  width: 100%;
+  overflow-clip-margin: content-box;
+  overflow: clip;
+`;
+
+const ItemP = styled.p`
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  `};
+`;
+
+const ItemHoverBox = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const MtDiv = styled.div`
+  margin-top: 20px;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      margin-top: 60px;
+    }
+  `};
+`;
+
+const SpecialBox = styled.div`
+  position: relative;
+  width: 305px !important;
+  height: 156px !important;
+  margin-right: 8px;
+  display: flex !important;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      align-items: flex-end;
+      width: 492px !important;
+      height: 262px !important;
+      margin-right: 16px;
+    }
+  `};
+`;
+
+const SpecialWrapper = styled.div`
+  display: flex;
+  background-color: #def0f2;
+  border-radius: 16px;
+  height: 136px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      justify-content: end;
+      height: 236px;
+    }
+  `};
+`;
+
+const SpecialImg = styled.img`
+  width: 148px;
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      width: 262px;
+    }
+  `};
+`;
+const SpecialInfo = styled.div`
+  padding-top: 0px;
+  padding-right: 18px;
+  position: absolute;
+  right: 0;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      padding-top: 36px;
+      padding-right: 36px;
+    }
+  `};
+`;
+
+const SpecialLi = styled.li`
+  font-size: 11px;
+  line-height: 1.5;
+  color: rgba(34, 34, 34, 0.71);
+  ${({ theme }) => css`
+    @media (min-width: 960px) {
+      font-size: 14px;
+    }
+  `};
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      font-size: 16px;
+    }
+  `};
 `;
 
 const Main: React.FC<MainProps> = ({ windowWidth }) => {
@@ -489,7 +619,8 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
     autoplaySpeed: 3000,
     draggable: false,
     slidesToShow: 1,
-    arrows: false
+    arrows: false,
+    loop: true
   };
   const settings2 = {
     dots: true,
@@ -497,6 +628,7 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
     autoplaySpeed: 3000,
     slidesToShow: 1,
     arrows: false,
+    loop: true,
     appendDots: (dots: any) => (
       <div
         style={{
@@ -512,6 +644,12 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
       </div>
     ),
     dotsClass: "dots_custom"
+  };
+  const settings3 = {
+    autoplay: false,
+    slidesToShow: 3,
+    arrow: false,
+    loop: true
   };
 
   return (
@@ -805,15 +943,208 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
         </Article>
 
         <ArticleGrid>
-          <ItemContainer></ItemContainer>
-          <ItemContainer></ItemContainer>
-          <ItemContainer></ItemContainer>
-          <ItemContainer></ItemContainer>
-          <ItemContainer></ItemContainer>
-          <ItemContainer></ItemContainer>
-          <ItemContainer></ItemContainer>
-          <ItemContainer></ItemContainer>
+          <ItemContainer>
+            <ItemImg src="https://eap.mindcafe.co.kr/images/main/section-05-room-01.png" />
+            <ItemHoverBox>
+              <ItemP>
+                마인드카페
+                <br />
+                라운지
+              </ItemP>
+            </ItemHoverBox>
+          </ItemContainer>
+          <ItemContainer>
+            <ItemImg src="https://eap.mindcafe.co.kr/images/main/section-05-room-02.png" />
+            <ItemHoverBox>
+              <ItemP>
+                마인드카페
+                <br />
+                휴게공간
+              </ItemP>
+            </ItemHoverBox>
+          </ItemContainer>
+          <ItemContainer>
+            <ItemImg src="https://eap.mindcafe.co.kr/images/main/section-05-room-03.png" />
+            <ItemHoverBox>
+              <ItemP>
+                마인드카페
+                <br />
+                아동대기실
+              </ItemP>
+            </ItemHoverBox>
+          </ItemContainer>
+          <ItemContainer>
+            <ItemImg src="https://eap.mindcafe.co.kr/images/main/section-05-room-04.png" />
+            <ItemHoverBox>
+              <ItemP>
+                마인드카페
+                <br />
+                아동 미술치료실
+              </ItemP>
+            </ItemHoverBox>
+          </ItemContainer>
+          <ItemContainer>
+            <ItemImg src="https://eap.mindcafe.co.kr/images/main/section-05-room-05.png" />
+            <ItemHoverBox>
+              <ItemP>
+                마인드카페
+                <br />
+                부부상담실
+              </ItemP>
+            </ItemHoverBox>
+          </ItemContainer>
+          <ItemContainer>
+            <ItemImg src="https://eap.mindcafe.co.kr/images/main/section-05-room-06.png" />
+            <ItemHoverBox>
+              <ItemP>
+                마인드카페
+                <br />
+                아동 놀이치료실
+              </ItemP>
+            </ItemHoverBox>
+          </ItemContainer>
+          <ItemContainer>
+            <ItemImg src="https://eap.mindcafe.co.kr/images/main/section-05-room-07.png" />
+            <ItemHoverBox>
+              <ItemP>
+                마인드카페
+                <br />
+                밸런스 검사실
+              </ItemP>
+            </ItemHoverBox>
+          </ItemContainer>
+          <ItemContainer>
+            <ItemImg src="https://eap.mindcafe.co.kr/images/main/section-05-room-08.png" />
+            <ItemHoverBox>
+              <ItemP>
+                마인드카페
+                <br />
+                심리상담실
+              </ItemP>
+            </ItemHoverBox>
+          </ItemContainer>
         </ArticleGrid>
+      </Article>
+
+      <Article>
+        <InnerBox>
+          <div>
+            <H2>업계 최대 규모, 최고의 전문의</H2>
+            <P style={{ width: "384px" }}>
+              업계 최대 자체 정신건강 R&D 연구소 운영을 통해 최적의 전문케어를
+              제공합니다.
+            </P>
+          </div>
+          <MtDiv>
+            <Slider {...settings3} className="widthfull">
+              <div>
+                <SpecialBox>
+                  <SpecialWrapper>
+                    <SpecialImg src="https://eap.mindcafe.co.kr/images/main/section-06-doctor-01.png" />
+                    <SpecialInfo>
+                      <p className="p6">양재진 원장</p>
+                      <ul>
+                        <SpecialLi>· 마인드카페 고문</SpecialLi>
+                        <SpecialLi>· 진병원 대표 원장</SpecialLi>
+                        <SpecialLi>· MBN 속풀이쇼 출연</SpecialLi>
+                        <SpecialLi>· SBS 동상이몽 출연</SpecialLi>
+                      </ul>
+                    </SpecialInfo>
+                  </SpecialWrapper>
+                </SpecialBox>
+              </div>
+              <div>
+                <SpecialBox>
+                  <SpecialWrapper>
+                    <SpecialImg src="https://eap.mindcafe.co.kr/images/main/section-06-doctor-02.png" />
+                    <SpecialInfo>
+                      <p className="p6">양재웅 원장</p>
+                      <ul>
+                        <SpecialLi>· 마인드카페 이사</SpecialLi>
+                        <SpecialLi>· W진병원 대표 원장</SpecialLi>
+                        <SpecialLi>· 채널A 하트시그널 출연</SpecialLi>
+                        <SpecialLi>· JTBC 비정상회담 출연</SpecialLi>
+                      </ul>
+                    </SpecialInfo>
+                  </SpecialWrapper>
+                </SpecialBox>
+              </div>
+              <div>
+                <SpecialBox>
+                  <SpecialWrapper>
+                    <SpecialImg src="https://eap.mindcafe.co.kr/images/main/section-06-doctor-03.png" />
+                    <SpecialInfo>
+                      <p className="p6">이승원 소장</p>
+                      <ul>
+                        <SpecialLi>· 마카 심리연구소 소장</SpecialLi>
+                        <SpecialLi>· 경희사이버대 </SpecialLi>
+                        <SpecialLi>&nbsp;&nbsp;상담심리학과 교수</SpecialLi>
+                        <SpecialLi>· 고려대 심리학과 임상/</SpecialLi>
+                        <SpecialLi>&nbsp;&nbsp;상담심리 박사(수료)</SpecialLi>
+                      </ul>
+                    </SpecialInfo>
+                  </SpecialWrapper>
+                </SpecialBox>
+              </div>
+              <div>
+                <SpecialBox>
+                  <SpecialWrapper>
+                    <SpecialImg src="https://eap.mindcafe.co.kr/images/main/section-06-doctor-04.png" />
+                    <SpecialInfo>
+                      <p className="p6">박윤정 원장</p>
+                      <ul>
+                        <SpecialLi>· 마인드카페 심리센터(수내) 원장</SpecialLi>
+                        <SpecialLi>· 한국임상심리학회</SpecialLi>
+                        <SpecialLi>&nbsp;&nbsp;임상심리 전문가</SpecialLi>
+                        <SpecialLi>· 보건복지부</SpecialLi>
+                        <SpecialLi>
+                          &nbsp;&nbsp;정신건강임상심리사 1급
+                        </SpecialLi>
+                      </ul>
+                    </SpecialInfo>
+                  </SpecialWrapper>
+                </SpecialBox>
+              </div>
+              <div>
+                <SpecialBox>
+                  <SpecialWrapper>
+                    <SpecialImg src="https://eap.mindcafe.co.kr/images/main/section-06-doctor-05.png" />
+                    <SpecialInfo>
+                      <p className="p6">오지희 원장</p>
+                      <ul>
+                        <SpecialLi>· 마인드카페 심리센터</SpecialLi>
+                        <SpecialLi>&nbsp;&nbsp;(한남) 원장</SpecialLi>
+                        <SpecialLi>· 한국임상심리학회</SpecialLi>
+                        <SpecialLi>&nbsp;&nbsp;임상심리 전문가</SpecialLi>
+                        <SpecialLi>· 중앙대 심리학과 석사</SpecialLi>
+                      </ul>
+                    </SpecialInfo>
+                  </SpecialWrapper>
+                </SpecialBox>
+              </div>
+            </Slider>
+          </MtDiv>
+        </InnerBox>
+      </Article>
+      <Article>
+        <InnerBox>
+          <PcFlexDiv>
+            <div>
+              <H2>1,000명의 상담·코칭 전문가 보유</H2>
+              <P>
+                엄격한 선발기준과 특화된 교육을 통해 최상의 서비스를 제공합니다
+              </P>
+            </div>
+            <Div>
+              <a href="#">
+                <ItemImg src="https://eap.mindcafe.co.kr/images/common/expert-apply.png" />
+              </a>
+            </Div>
+          </PcFlexDiv>
+          <div>
+            <Slider></Slider>
+          </div>
+        </InnerBox>
       </Article>
     </div>
   );
