@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -11,6 +11,28 @@ import PrevArrows from "../components/PrevArrows";
 interface MainProps {
   windowWidth: number;
 }
+
+const slideIn = keyframes`
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+`;
 
 const MainBanner = styled.div`
   opacity: 0;
@@ -673,10 +695,106 @@ const ExpertObj = styled.div`
   color: #aaa;
 `;
 
+const EapBox = styled.div<{ bg: string }>`
+  width: 100%;
+  height: 200px;
+  position: relative;
+  background-color: ${(props) => props.bg};
+  margin-bottom: 12px;
+  padding: 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  ${({ theme }) => css`
+    @media (min-width: 720px) {
+      width: 49.2%;
+      height: 208px;
+    }
+    @media (min-width: 1200px) {
+      width: 32%;
+      height: 252px;
+    }
+  `};
+`;
+
+const ButtonEap = styled.button<{ act: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: solid 1px;
+  border-color: ${(props) => (props.act ? "#007d7c" : "#fff")};
+  color: #fff;
+  background-color: ${(props) => (props.act ? "#007d7c" : "inherit")};
+  width: 106px;
+  height: 36px;
+  font-size: 16px;
+  cursor: pointer;
+`;
+
+const BackEap = styled.button<{ act: boolean }>`
+  position: absolute;
+  border-radius: 8px;
+  border: solid 1px;
+  border-color: ${(props) => (props.act ? "#007d7c" : "#fff")};
+  color: ${(props) => (props.act ? "#007d7c" : "#fff")};
+  width: 106px;
+  height: 36px;
+  right: 16px;
+  bottom: 12px;
+  font-size: 16px;
+  cursor: pointer;
+`;
+
+const EapImg = styled.img`
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+`;
+
+const MoreEap = styled.div<{ visible: boolean; bg: string }>`
+  background-color: ${(props) => props.bg};
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 4;
+  padding: 24px;
+  top: 0;
+  left: 0;
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  transform: translateY(${(props) => (props.visible ? "0" : "100%")});
+  transition: opacity 0.3s, transform 0.3s;
+`;
+
 const Main: React.FC<MainProps> = ({ windowWidth }) => {
   const sliderRef = useRef(null);
   const [slidesToShow1, setSlidesToShow1] = useState<number>(4);
   const [slidesToShow2, setSlidesToShow2] = useState<number>(3);
+
+  const [isMoreEapVisible1, setIsMoreEapVisible1] = useState(false);
+  const [isMoreEapVisible2, setIsMoreEapVisible2] = useState(false);
+  const [isMoreEapVisible3, setIsMoreEapVisible3] = useState(false);
+  const [isMoreEapVisible4, setIsMoreEapVisible4] = useState(false);
+  const [isMoreEapVisible5, setIsMoreEapVisible5] = useState(false);
+  const [isMoreEapVisible6, setIsMoreEapVisible6] = useState(false);
+
+  const handleButtonEapClick1 = () => {
+    setIsMoreEapVisible1(!isMoreEapVisible1);
+  };
+  const handleButtonEapClick2 = () => {
+    setIsMoreEapVisible2(!isMoreEapVisible2);
+  };
+  const handleButtonEapClick3 = () => {
+    setIsMoreEapVisible3(!isMoreEapVisible3);
+  };
+  const handleButtonEapClick4 = () => {
+    setIsMoreEapVisible4(!isMoreEapVisible4);
+  };
+  const handleButtonEapClick5 = () => {
+    setIsMoreEapVisible5(!isMoreEapVisible5);
+  };
+  const handleButtonEapClick6 = () => {
+    setIsMoreEapVisible6(!isMoreEapVisible6);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -1387,6 +1505,186 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
           </SlickDiv>
         </InnerBox>
       </Article2>
+
+      <Article style={{ marginTop: "60px" }} className="eap">
+        <InnerBox>
+          <H2>체계적인 EAP 프로그램 제공</H2>
+          <P>
+            기업과 직원에게 필요한 다양한
+            <br />
+            심리케어 프로그램을 제공합니다.
+          </P>
+          <div
+            className="flex_sb"
+            style={{ marginTop: "24px", flexWrap: "wrap" }}
+          >
+            <EapBox bg="#3bacae">
+              <div>
+                <p className="p4 white74">EAP시스템</p>
+                <p className="sub_title white">고객사 전용 EAP 시스템 구축</p>
+                <ButtonEap act={false} onClick={handleButtonEapClick1}>
+                  더 알아보기
+                </ButtonEap>
+                <EapImg src="https://eap.mindcafe.co.kr/images/main/section-08-graphic-01.png" />
+              </div>
+              <MoreEap bg="#3bacae" visible={isMoreEapVisible1}>
+                <p className="p6 white">EAP 시스템</p>
+                <ul style={{ marginTop: "4px" }}>
+                  <li className="white74 WebBody2">
+                    • 고객사 임직원 인증 시스템 구축
+                  </li>
+                  <li className="white74 WebBody2">
+                    • 전체 프로그램 이용 메뉴얼 제공
+                  </li>
+                  <li className="white74 WebBody2">
+                    • 앱을 통한 One stop EAP 서비스 제공
+                  </li>
+                </ul>
+                <BackEap act={false} onClick={handleButtonEapClick1}>
+                  돌아가기
+                </BackEap>
+              </MoreEap>
+            </EapBox>
+            <EapBox bg="#77c4c6">
+              <div>
+                <p className="p4 white74">심리 상담 & 코칭</p>
+                <p className="sub_title white">
+                  시공간 제약 없는 심리상담·코칭
+                </p>
+                <ButtonEap act={false} onClick={handleButtonEapClick2}>
+                  더 알아보기
+                </ButtonEap>
+                <EapImg src="https://eap.mindcafe.co.kr/images/main/section-08-graphic-02.png" />
+              </div>
+              <MoreEap bg="#77c4c6" visible={isMoreEapVisible2}>
+                <p className="p6 white">시공간 제약 없는 심리상담·코칭</p>
+                <ul style={{ marginTop: "4px" }}>
+                  <li className="white74 WebBody2 bold">온라인</li>
+                  <li className="white74 WebBody2">
+                    • 비대면 심리상담·코칭 제공
+                  </li>
+                  <li className="white74 WebBody2 bold">오프라인</li>
+                  <li className="white74 WebBody2">
+                    • 온·오프라인 연계 서비스
+                  </li>
+                  <li className="white74 WebBody2">
+                    • 국내 최고 시설의 직영센터
+                  </li>
+                </ul>
+                <BackEap act={false} onClick={handleButtonEapClick2}>
+                  돌아가기
+                </BackEap>
+              </MoreEap>
+            </EapBox>
+            <EapBox bg="#addadc">
+              <div>
+                <p className="p4 jingreen">홍보 컨텐츠</p>
+                <p className="sub_title blackgreen">
+                  지속적인 전문 심리상담 콘텐츠 제공
+                </p>
+                <ButtonEap act={true} onClick={handleButtonEapClick3}>
+                  더 알아보기
+                </ButtonEap>
+                <EapImg src="https://eap.mindcafe.co.kr/images/main/section-08-graphic-03.png" />
+              </div>
+              <MoreEap bg="#addadc" visible={isMoreEapVisible3}>
+                <p className="p6 blackgreen">
+                  지속적인 전문 심리상담 콘텐츠 제공
+                </p>
+                <ul style={{ marginTop: "4px" }}>
+                  <li className="jingreen WebBody2">
+                    • 온·오프라인 EAP 컨텐츠 제공
+                  </li>
+                  <li className="jingreen WebBody2">• 도입 프로모션</li>
+                </ul>
+                <BackEap act={true} onClick={handleButtonEapClick3}>
+                  돌아가기
+                </BackEap>
+              </MoreEap>
+            </EapBox>
+            <EapBox bg="#77c4c6">
+              <div>
+                <p className="p4 white74">보고서</p>
+                <p className="sub_title white">
+                  빅데이터를 활용한 조직 진단 보고
+                </p>
+                <ButtonEap act={false} onClick={handleButtonEapClick4}>
+                  더 알아보기
+                </ButtonEap>
+                <EapImg src="https://eap.mindcafe.co.kr/images/main/section-08-graphic-04.png" />
+              </div>
+              <MoreEap bg="#77c4c6" visible={isMoreEapVisible4}>
+                <p className="p6 white">빅데이터를 활용한 조직 진단 보고</p>
+                <ul style={{ marginTop: "4px" }}>
+                  <li className="white74 WebBody2 bold">
+                    빅데이터 조직 진단 보고
+                  </li>
+                  <li className="white74 WebBody2">• 조직 진단 결과 보고</li>
+                  <li className="white74 WebBody2">• 사전/사후 효과성 검증</li>
+                  <li className="white74 WebBody2 bold">단계별 보고서</li>
+                  <li className="white74 WebBody2">
+                    • 주기별 EAP 운영 현황 보고·컨설팅
+                  </li>
+                </ul>
+                <BackEap act={false} onClick={handleButtonEapClick4}>
+                  돌아가기
+                </BackEap>
+              </MoreEap>
+            </EapBox>
+            <EapBox bg="#addadc">
+              <div>
+                <p className="p4 jingreen">심리검사</p>
+                <p className="sub_title blackgreen">
+                  개인·조직 대상 다양한 심리검사 실시
+                </p>
+                <ButtonEap act={true} onClick={handleButtonEapClick5}>
+                  더 알아보기
+                </ButtonEap>
+                <EapImg src="https://eap.mindcafe.co.kr/images/main/section-08-graphic-05.png" />
+              </div>
+              <MoreEap bg="#addadc" visible={isMoreEapVisible5}>
+                <p className="p6 blackgreen">
+                  개인·조직 대상 다양한 심리검사 실시
+                </p>
+                <ul style={{ marginTop: "4px" }}>
+                  <li className="jingreen WebBody2">
+                    • 기본/ 심층 정신건강 진단
+                  </li>
+                  <li className="jingreen WebBody2">• 조직 진단</li>
+                  <li className="jingreen WebBody2">• 맞춤 연계 컨설팅</li>
+                </ul>
+                <BackEap act={true} onClick={handleButtonEapClick5}>
+                  돌아가기
+                </BackEap>
+              </MoreEap>
+            </EapBox>
+            <EapBox bg="#def0f2">
+              <div>
+                <p className="p4 jingreen">그룹 프로그램</p>
+                <p className="sub_title blackgreen">
+                  조직 맞춤 강연 및 프로그램 진행
+                </p>
+                <ButtonEap act={true} onClick={handleButtonEapClick6}>
+                  더 알아보기
+                </ButtonEap>
+                <EapImg src="https://eap.mindcafe.co.kr/images/main/section-08-graphic-06.png" />
+              </div>
+              <MoreEap bg="#def0f2" visible={isMoreEapVisible6}>
+                <p className="p6 blackgreen">조직 맞춤 강연 및 프로그램 진행</p>
+                <ul style={{ marginTop: "4px" }}>
+                  <li className="jingreen WebBody2">
+                    • Work & Life 주제 강연, 집단상담
+                  </li>
+                  <li className="jingreen WebBody2">• 사전/사후 효과성 검증</li>
+                </ul>
+                <BackEap act={true} onClick={handleButtonEapClick6}>
+                  돌아가기
+                </BackEap>
+              </MoreEap>
+            </EapBox>
+          </div>
+        </InnerBox>
+      </Article>
     </div>
   );
 };

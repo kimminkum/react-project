@@ -127,6 +127,20 @@ ul {
   line-height: 1.5;
 }
 
+.sub_title {
+  font-size: 16px;
+  margin: 16px 0 18px;
+  line-height: 1.5;
+  font-weight: bold;
+  width: 44%;
+}
+
+.p4 {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
 .p5 {
   color: #222;
   font-family: NotoSans;
@@ -154,6 +168,35 @@ ul {
 .career {
   margin-bottom: 8px;
 }
+
+.white74 {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.white {
+  color: #fff;
+}
+
+.jingreen {
+  color: #009b9c;
+}
+
+.blackgreen {
+  color: #005e5b;
+}
+
+.eap * {
+  font-weight: bold;
+}
+
+.eap li {
+  font-weight: normal;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 /* slick */
 .slick-slider {
   display: block;
@@ -236,5 +279,17 @@ ul {
   }
   .WebBody2 {
     font-size: 16px;
+  }
+  .sub_title {
+    font-size: 24px;
+    width: 52%;
+  }
+
+  .eap * {
+    font-weight: bold;
+  }
+
+  .eap li {
+    font-weight: normal;
   }
 }
