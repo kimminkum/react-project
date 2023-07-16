@@ -700,7 +700,7 @@ const EapBox = styled.div<{ bg: string }>`
   height: 200px;
   position: relative;
   background-color: ${(props) => props.bg};
-  margin-bottom: 12px;
+  margin-bottom: 36px;
   padding: 24px;
   border-radius: 16px;
   overflow: hidden;
@@ -765,8 +765,92 @@ const MoreEap = styled.div<{ visible: boolean; bg: string }>`
   transition: opacity 0.3s, transform 0.3s;
 `;
 
+const GraphDiv = styled.div`
+  border-radius: 24px;
+  background-color: #def0f2;
+  margin-top: 12px;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      min-width: 422px;
+      margin-right: 40px;
+    }
+  `};
+`;
+
+const GraphInfoDiv = styled.div`
+  width: 100%;
+  margin: 12px 0 0 0;
+  color: rgba(255, 255, 255, 0.89)
+    ${({ theme }) => css`
+      @media (min-width: 1200px) {
+        width: 62%;
+        margin: 12px 12px 0 0;
+      }
+    `};
+`;
+
+const GraphBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px;
+  color: #2a2a2a;
+`;
+
+const GraphLi = styled.li<{ bg: string }>`
+  background-color: ${(props) => props.bg};
+  border-radius: 24px;
+  margin-bottom: 12px;
+  padding: 24px;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      padding: 24px 48px;
+    }
+  `};
+`;
+
+const GrapNum = styled.span`
+  margin-right: 8px;
+  color: #fff;
+  font-size: 34px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+  ${({ theme }) => css`
+    @media (min-width: 1200px) {
+      font-size: 64px;
+    }
+  `};
+`;
+
+const ReviewBox = styled.div`
+  width: 100%;
+  padding: 24px;
+  height: 300px;
+`;
+const ReviewTitle = styled.h3`
+  margin-bottom: 8px;
+  color: #888;
+`;
+const ReviewSub = styled.p`
+  font-weight: bold;
+  color: #888;
+  font-size: 18px;
+  margin: auto 6px;
+`;
+const ReviewImg = styled.img`
+  width: 22px;
+  padding: 0;
+`;
+const ReviewTxt = styled.p`
+  color: #888;
+  margin-top: 12px;
+  font-size: 14px;
+`;
+
 const Main: React.FC<MainProps> = ({ windowWidth }) => {
   const sliderRef = useRef(null);
+  const sliderRef2 = useRef(null);
   const [slidesToShow1, setSlidesToShow1] = useState<number>(4);
   const [slidesToShow2, setSlidesToShow2] = useState<number>(3);
 
@@ -776,6 +860,13 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
   const [isMoreEapVisible4, setIsMoreEapVisible4] = useState(false);
   const [isMoreEapVisible5, setIsMoreEapVisible5] = useState(false);
   const [isMoreEapVisible6, setIsMoreEapVisible6] = useState(false);
+
+  const VoiceImg: string =
+    "https://eap.mindcafe.co.kr/images/main/section-09-icon-02.png";
+  const TxtImg: string =
+    "https://eap.mindcafe.co.kr/images/main/section-09-icon-03.png";
+  const GroupImg: string =
+    "https://eap.mindcafe.co.kr/images/main/section-09-icon-01.png";
 
   const handleButtonEapClick1 = () => {
     setIsMoreEapVisible1(!isMoreEapVisible1);
@@ -861,6 +952,12 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
     slidesToShow: slidesToShow1,
     autoplay: true,
     autoplaySpeed: 3000,
+    loop: true,
+    arrows: false
+  };
+  const settings5 = {
+    slidesToShow: slidesToShow2,
+    autoplay: false,
     loop: true,
     arrows: false
   };
@@ -1685,6 +1782,197 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
           </div>
         </InnerBox>
       </Article>
+
+      <Article className="graph">
+        <InnerBox>
+          <div>
+            <H2></H2>
+            <P></P>
+          </div>
+          <PcFlexDiv>
+            <GraphDiv>
+              <GraphBox>
+                <p className="WebH4">불안, 우울 등 심리 지표의 유의미한 감소</p>
+                <img
+                  src="https://eap.mindcafe.co.kr/images/main/section-08-graph-01.png"
+                  alt=""
+                  style={{
+                    marginTop: "54px"
+                  }}
+                />
+                <p className="smallP">
+                  아토머스x행복나눔재단 코로나 피해자 대상 비대면상담 효과성
+                  검증 프로젝트(2020)
+                </p>
+              </GraphBox>
+            </GraphDiv>
+            <GraphInfoDiv>
+              <ul>
+                <GraphLi bg="#3bacae">
+                  <div className="flex_sb">
+                    <p className="WebH4 white74" style={{ width: "35%" }}>
+                      심리치료로 경감되는 불안정도
+                    </p>
+                    <div className="flex">
+                      <GrapNum className="white">50%</GrapNum>
+                      <img
+                        src="https://eap.mindcafe.co.kr/images/main/section-08-graph-02.png"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </GraphLi>
+                <GraphLi bg="#77c4c6">
+                  <div className="flex_sb">
+                    <p className="WebH4 white74" style={{ width: "35%" }}>
+                      심리치료로 감소하는 업무시간 손실
+                    </p>
+                    <div className="flex">
+                      <GrapNum className="white">50%</GrapNum>
+                      <img
+                        src="https://eap.mindcafe.co.kr/images/main/section-08-graph-02.png"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </GraphLi>
+                <GraphLi bg={"#addadc"}>
+                  <div className="flex_sb">
+                    <p className="WebH4 jingreen" style={{ width: "35%" }}>
+                      심리치료로 향상되는 업무 생산성
+                    </p>
+                    <div className="flex">
+                      <GrapNum className="blackgreen">36%</GrapNum>
+                      <img
+                        src="https://eap.mindcafe.co.kr/images/main/section-08-graph-03.png"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </GraphLi>
+                <p className="smallP" style={{ marginTop: "12px" }}>
+                  Meghan DellaCrosse, Kush Mahan & Thomas D. Hull, Journal of
+                  Tech. in Behavioral Science, 4 (2019)
+                </p>
+              </ul>
+            </GraphInfoDiv>
+          </PcFlexDiv>
+        </InnerBox>
+      </Article>
+
+      <Article2>
+        <InnerBox>
+          <div style={{ marginTop: "60px" }}>
+            <div style={{ marginBottom: "20px" }}>
+              <H2>10,000여 개의 후기로 증명된 상담 효과</H2>
+              <P>
+                상담사에 대해 사람들이 어떻게 생각했는지 앱 내에서 바로 확인할
+                수 있습니다.
+              </P>
+            </div>
+          </div>
+          <Line></Line>
+          <SlickDiv>
+            <Slider {...settings5} ref={sliderRef2} className="around">
+              <div>
+                <ReviewBox>
+                  <ReviewTitle>집중해서 들어주세요</ReviewTitle>
+                  <div className="flex">
+                    <ReviewImg src={VoiceImg} />
+                    <ReviewSub>보이스 테라피</ReviewSub>
+                    <ReviewImg src="https://eap.mindcafe.co.kr/images/main/section-09-icon-05.png" />
+                    <ReviewSub>5.0</ReviewSub>
+                  </div>
+                  <ReviewTxt>
+                    요즘 회사에서 스트레스를 너무 많이 받고 있습니다. 사람
+                    만나는 것도 싫고 집에만 있고 싶고 내가 우울증에 걸렸나? 라는
+                    생각도 들고 머릿속이 복잡했는데, 집에서 앱으로 상담 받을 수
+                    있다고 해서 해봤어요. 상담사 선생님께서 정말 집중해서
+                    들어주시고 말씀해 주셔서 감동받았어요 너무 감사합니다.
+                  </ReviewTxt>
+                </ReviewBox>
+              </div>
+              <div>
+                <ReviewBox>
+                  <ReviewTitle>마음이 너무 편해졌어요</ReviewTitle>
+                  <div className="flex">
+                    <ReviewImg src={TxtImg} />
+                    <ReviewSub>텍스트 테라피</ReviewSub>
+                    <ReviewImg src="https://eap.mindcafe.co.kr/images/main/section-09-icon-05.png" />
+                    <ReviewSub>5.0</ReviewSub>
+                  </div>
+                  <ReviewTxt>
+                    최근 너무 힘든 일이 많은데 정신과라는 타이틀이 너무 무겁게만
+                    느껴졌습니다. 그러다가 우연히 알게 된 마인드 카페에서 가볍게
+                    들어와 둘러보다 상담사 분과 테라피를 진행했는데 어렵지 않게
+                    제 감정과 생각을 전달하면서 선생님께서 꼼꼼히 답변해 주셔서
+                    너무 좋았습니다. 이렇게나마 털어놓으니 맘이 너무 편해졌어요.
+                  </ReviewTxt>
+                </ReviewBox>
+              </div>
+              <div>
+                <ReviewBox>
+                  <ReviewTitle>우울한 이유를 알게 됐어요</ReviewTitle>
+                  <div className="flex">
+                    <ReviewImg src={GroupImg} />
+                    <ReviewSub>그룹 테라피</ReviewSub>
+                    <ReviewImg src="https://eap.mindcafe.co.kr/images/main/section-09-icon-05.png" />
+                    <ReviewSub>5.0</ReviewSub>
+                  </div>
+                  <ReviewTxt>
+                    다른 원데이 클래스랑은 비교가 안되는 그룹 테라피 때문에 이
+                    앱 팬이 됐어요. 다른 데에서 힐링 관련된 원데이 클래스 아무리
+                    들어도 그냥 적당히 하하 호호 하고 체험하고 끝이었는데,
+                    여기는 진짜 심리상담사가 심리와 관련된 그룹 테라피를
+                    진행하니까 확실히 너무 좋아요. 저는 가끔 갑자기 이유를
+                    모르는 우울함이 덮쳐와서 힘들 때가 있었는데 명상 클래스
+                    들으면서 많이 울기도 하고, 제가 우울한 이유를 알게
+                    되었습니다.
+                  </ReviewTxt>
+                </ReviewBox>
+              </div>
+              <div>
+                <ReviewBox>
+                  <ReviewTitle>신뢰가 가는 서비스</ReviewTitle>
+                  <div className="flex">
+                    <ReviewImg src={VoiceImg} />
+                    <ReviewSub>보이스 테라피</ReviewSub>
+                    <ReviewImg src="https://eap.mindcafe.co.kr/images/main/section-09-icon-05.png" />
+                    <ReviewSub>5.0</ReviewSub>
+                  </div>
+                  <ReviewTxt>
+                    정신과 진료를 많이 받아봤는데 효과가 없고 약만 타러 가게
+                    되더라고요. 그래서 상담 치료를 알아보던 중 마인드카페를 알게
+                    되었는데 상담지 작성부터 상담사를 직접 선택할 수 있는 게
+                    너무 마음에 들었고, 신뢰가 갔습니다.
+                  </ReviewTxt>
+                </ReviewBox>
+              </div>
+              <div>
+                <ReviewBox>
+                  <ReviewTitle>나를 알아가는 시간</ReviewTitle>
+                  <div className="flex">
+                    <ReviewImg src={GroupImg} />
+                    <ReviewSub>그룹 테라피</ReviewSub>
+                    <ReviewImg src="https://eap.mindcafe.co.kr/images/main/section-09-icon-05.png" />
+                    <ReviewSub>5.0</ReviewSub>
+                  </div>
+                  <ReviewTxt>
+                    매일 누군가와 상담할 수 있는 서비스도 좋고 상담 선생님들을
+                    다양하게 접하고 나에게 맞는 분을 직접 선택할 수 있어서
+                    좋습니다. 자기성찰을 할 수 있는 좋은 앱입니다. 자신을
+                    모르겠다면 꼭 한 번 해 보시길 바랍니다.
+                  </ReviewTxt>
+                </ReviewBox>
+              </div>
+            </Slider>
+            {windowWidth > 1200 && <NextArrows onClickNext={handleNext} />}
+            {windowWidth > 1200 && <PrevArrows onClickPrev={handlePrev} />}
+          </SlickDiv>
+        </InnerBox>
+      </Article2>
+
+      <Article></Article>
     </div>
   );
 };

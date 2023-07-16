@@ -88,22 +88,27 @@ ul {
 
 .flex {
   display: flex;
+  align-items: center;
 }
 .flex_sb {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .flex_sa {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 .flex_end {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 .flex_center {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 @keyframes fade_in {
@@ -124,6 +129,12 @@ ul {
 
 .WebBody1 {
   font-size: 16px;
+  line-height: 1.5;
+}
+
+.WebH4 {
+  font-size: 24px;
+  font-weight: bold;
   line-height: 1.5;
 }
 
@@ -155,6 +166,13 @@ ul {
   line-height: 1.5;
   font-size: 16px;
   font-weight: bold;
+}
+
+.smallP {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 40px;
+  color: #2f2f2f;
 }
 
 .name {
@@ -195,6 +213,17 @@ ul {
 
 .bold {
   font-weight: bold;
+}
+
+.voiceTerapi {
+  position: relative;
+  margin-left: 20px;
+}
+
+.voiceTerapi::after {
+  content: "";
+  position: absolute;
+  right: 100%;
 }
 
 /* slick */
@@ -291,5 +320,9 @@ ul {
 
   .eap li {
     font-weight: normal;
+  }
+
+  .WebH4 {
+    font-size: 34px;
   }
 }
