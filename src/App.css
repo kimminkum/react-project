@@ -5,7 +5,7 @@ li {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  outline: 1px solid red;
+  outline: 0px solid red;
 }
 
 body {
@@ -109,6 +109,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 @keyframes fade_in {
@@ -120,6 +121,10 @@ ul {
     opacity: 1;
     transform: none;
   }
+}
+
+.Accopen {
+  background-color: rgba(157, 163, 179, 0.24);
 }
 
 .WebBody2 {
@@ -189,6 +194,20 @@ ul {
 
 .white74 {
   color: rgba(255, 255, 255, 0.74);
+}
+
+.exper {
+  color: var(--global-turquoise-900);
+  line-height: 1.5;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.exper_sub {
+  color: rgba(34, 34, 34, 0.62);
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .white {
@@ -324,5 +343,13 @@ ul {
 
   .WebH4 {
     font-size: 34px;
+  }
+
+  .exper {
+    font-size: 34px;
+  }
+
+  .exper_sub {
+    font-size: 20px;
   }
 }

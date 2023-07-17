@@ -16,13 +16,14 @@ interface FooterProps {
 
 const Container = styled.div`
   width: 360px;
-  margin: 60px auto;
+  margin: 0 auto 60px;
   text-align: center;
 
   ${({ theme }) => css`
     @media (min-width: 1200px) {
       width: 100%;
       max-width: 1200px;
+      margin: 60px auto;
     }
   `}
 `;

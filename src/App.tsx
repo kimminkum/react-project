@@ -45,22 +45,6 @@ function App() {
             {/* <Route
               path="/about/*"
               element={<About windowWidth={windowWidth} />}
-            ></Route>
-            <Route
-              path="/business/*"
-              element={<Business windowWidth={windowWidth} />}
-            ></Route>
-            <Route
-              path="/pr"
-              element={<Pr windowWidth={windowWidth} />}
-            ></Route>
-            <Route
-              path="/careers/*"
-              element={<Careers windowWidth={windowWidth} />}
-            ></Route>
-            <Route
-              path="/contact"
-              element={<Contact windowWidth={windowWidth} />}
             ></Route> */}
           </Routes>
         )}

@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import NextArrows from "../components/NextArrows";
 import PrevArrows from "../components/PrevArrows";
+import Accordion from "../components/Accordion";
 
 interface MainProps {
   windowWidth: number;
@@ -141,20 +142,20 @@ const Button = styled.button`
 
 const Article = styled.article`
   margin: 30px 0;
-  padding: 30px 0;
+  padding: 20px 0;
   ${({ theme }) => css`
     @media (min-width: 1200px) {
-      padding: 0;
+      padding: 30px 0;
     }
   `}
 `;
 const Article2 = styled.article`
   margin: 30px 0;
-  padding: 30px 0;
+  padding: 20px 0;
   background-color: rgba(119, 196, 198, 0.24);
   ${({ theme }) => css`
     @media (min-width: 1200px) {
-      padding: 0;
+      padding: 30px 0;
       background-color: #fff;
     }
   `}
@@ -848,9 +849,112 @@ const ReviewTxt = styled.p`
   font-size: 14px;
 `;
 
+const GridBox4 = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 8px;
+  ${({ theme }) => css`
+    @media (min-width: 760px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 1060px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  `};
+`;
+
+const SupportBox = styled.div<{ bg: string }>`
+  width: 100%;
+  height: 400px;
+  position: relative;
+  background-color: ${(props) => props.bg};
+  border-radius: 16px;
+  overflow: hidden;
+`;
+
+const SupportTxtBox = styled.div`
+  padding: 28px;
+`;
+
+const SupportImg = styled.img`
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+`;
+
+const FaqBox = styled.div`
+  margin: 30px 0;
+`;
+
+const PageButtonBox = styled.ul`
+  position: relative;
+  width: 320px;
+`;
+const PageButton = styled.li`
+  font-size: 1.3rem;
+  margin: 0 16px;
+  cursor: pointer;
+`;
+
+const ExperBox = styled.div`
+  margin-top: 50px;
+  margin-bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  ${({ theme }) => css`
+    @media (min-width: 1060px) {
+      display: block;
+    }
+  `};
+`;
+
+const Experience = styled.div`
+  position: relative;
+  background-image: linear-gradient(
+    99deg,
+    var(--global-light-orange-50) 10%,
+    var(--global-turquoise-50) 91%
+  );
+  width: 100%;
+  height: 441px;
+`;
+
+const ExperienceImg = styled.img`
+  position: absolute;
+  right: 250px;
+  bottom: 0;
+  width: 354px;
+`;
+
+const ExperButton = styled.button`
+  height: 56px;
+  margin: 36px 0;
+
+  background-color: #007d7c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border-radius: 28px;
+  padding: 20px 36px;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.75px;
+  font-weight: bold;
+`;
+
 const Main: React.FC<MainProps> = ({ windowWidth }) => {
   const sliderRef = useRef(null);
   const sliderRef2 = useRef(null);
+  const [faqNum, setFaqNum] = useState<number>(1);
+  const maxPage = 3;
   const [slidesToShow1, setSlidesToShow1] = useState<number>(4);
   const [slidesToShow2, setSlidesToShow2] = useState<number>(3);
 
@@ -885,6 +989,10 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
   };
   const handleButtonEapClick6 = () => {
     setIsMoreEapVisible6(!isMoreEapVisible6);
+  };
+
+  const pageChange = (page: number) => {
+    setFaqNum(page);
   };
 
   useEffect(() => {
@@ -967,6 +1075,21 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
 
   const handleNext = () => {
     (sliderRef.current as any).slickNext(); // 슬라이드 다음으로 이동
+  };
+
+  const eventPrev = () => {
+    if (faqNum > 1) {
+      setFaqNum(faqNum - 1);
+    } else {
+      return;
+    }
+  };
+  const eventNext = () => {
+    if (faqNum < maxPage) {
+      setFaqNum(faqNum + 1);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -1786,8 +1909,8 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
       <Article className="graph">
         <InnerBox>
           <div>
-            <H2></H2>
-            <P></P>
+            <H2>스트레스·불면증 66% 이상 감소</H2>
+            <P>직원들의 불안, 우울, 스트레스 지수를 유의미하게 감소시킵니다.</P>
           </div>
           <PcFlexDiv>
             <GraphDiv>
@@ -1972,7 +2095,275 @@ const Main: React.FC<MainProps> = ({ windowWidth }) => {
         </InnerBox>
       </Article2>
 
-      <Article></Article>
+      <Article>
+        <InnerBox>
+          <div>
+            <H2>온·오프라인 통합 지원</H2>
+            <P>
+              지속적인 온·오프라인 프로그램 홍보 활동을 통해 직원들의 참여도를
+              높입니다.
+            </P>
+          </div>
+          <GridBox4 style={{ margin: "20px 0" }}>
+            <SupportBox bg="#3bacae">
+              <SupportTxtBox>
+                <p className="white74 WebBody1">온라인</p>
+                <p className="white WebH4">
+                  화상(비디오)
+                  <br />
+                  원격 EAP
+                  <br />
+                  설명회 개최
+                </p>
+                <SupportImg src="https://eap.mindcafe.co.kr/images/main/section-10-image-01.png" />
+              </SupportTxtBox>
+            </SupportBox>
+            <SupportBox bg="#77c4c6">
+              <SupportTxtBox>
+                <p className="white74 WebBody1">온라인</p>
+                <p className="white WebH4">
+                  상담 이용법·
+                  <br />
+                  정신건강 증진
+                  <br />
+                  콘텐츠 제공
+                </p>
+                <SupportImg src="https://eap.mindcafe.co.kr/images/main/section-10-image-02.png" />
+              </SupportTxtBox>
+            </SupportBox>
+            <SupportBox bg="#addadc">
+              <SupportTxtBox>
+                <p className="white74 WebBody1">온라인</p>
+                <p className="white WebH4">
+                  직원·기업용
+                  <br />
+                  마인드카페
+                  <br />
+                  가이드 제공
+                </p>
+                <SupportImg src="https://eap.mindcafe.co.kr/images/main/section-10-image-03.png" />
+              </SupportTxtBox>
+            </SupportBox>
+            <SupportBox bg="#def0f2">
+              <SupportTxtBox>
+                <p className="jingreen WebBody1">오프라인</p>
+                <p className="blackgreen WebH4">
+                  EAP 활성화를
+                  <br />
+                  위한 찾아가는
+                  <br />
+                  상담실 운영
+                </p>
+                <SupportImg src="https://eap.mindcafe.co.kr/images/main/section-10-image-04.png" />
+              </SupportTxtBox>
+            </SupportBox>
+          </GridBox4>
+        </InnerBox>
+      </Article>
+
+      <Article>
+        <InnerBox>
+          <div>
+            <H2>FAQ</H2>
+            <P>자주 묻는 질문들을 정리하였습니다.</P>
+          </div>
+          {faqNum === 1 && (
+            <FaqBox>
+              <Accordion title="마인드카페 EAP, 왜 필요한가요?">
+                <p>
+                  직무 스트레스 및 마음건강 문제로 인한 직원들의 손실은 1인당
+                  연간 1,000만원에 달합니다. 마인드카페 EAP는 임직원의
+                  스트레스와 심리적 어려움을 해결하는 장치 중 하나로, 기업의
+                  리스크를 예방하고 관리합니다.
+                </p>
+              </Accordion>
+              <Accordion title="마인드카페 EAP는 비대면 서비스만 제공되나요?">
+                <p>
+                  온·오프라인 통합 서비스로 앱을 통한 비대면 서비스와 대면
+                  서비스를 함께 제공해 드리고 있습니다.
+                </p>
+              </Accordion>
+              <Accordion title="비대면/대면 상담 중 어떤 유형을 많이 이용하나요?">
+                <p>
+                  비대면상담 65%, 대면상담 35%로 비대면상담을 더 많이 이용하고
+                  있습니다.
+                </p>
+              </Accordion>
+              <Accordion title="해외에 있는 임직원도 이용이 가능한가요?">
+                <p>
+                  마인드카페 앱은 전세계 어디에서든 이용할 수 있습니다. 상담사와
+                  스케줄 협의를 통해 진행되고 있으며 꾸준히 해외 상담사도 신규
+                  채용 중에 있습니다.
+                </p>
+              </Accordion>
+            </FaqBox>
+          )}
+          {faqNum === 2 && (
+            <FaqBox>
+              <Accordion title="평균 몇 회기 상담을 이용하나요?">
+                <p>
+                  임직원의 상황에 따라 상담사가 조절하고 있습니다. 고위험군 또는
+                  우울, 불안 지수가 높은 내담자의 경우에는 8회기를 추천 드리고
+                  있으며 평균적으로 4~8회기 정도를 이용하고 있습니다.
+                </p>
+              </Accordion>
+              <Accordion title="어떤 심리상담 주제가 가장 많은가요?">
+                <p>
+                  마인드카페 EAP는 Work와 Life 주제를 따로 취합하고 있습니다.
+                </p>
+                <p>&nbsp;</p>
+                <p>
+                  Work 부분 에서는 직무 스트레스, 직무 적응 주제의 상담이 가장
+                  많으며 Life 부분에서는 대인관계의 문제를 가장 많이 호소하고
+                  있습니다.
+                </p>
+              </Accordion>
+              <Accordion title="상담사 채용 과정과 관리는 어떻게 진행되고 있나요?">
+                <p>
+                  기업 부설 심리연구소를 설립하여 상담사를 직접 채용 및 관리를
+                  하고 있습니다. 심리상담 관련 분야 석/박사 학위, 공인 자격증,
+                  실무경력을 보유한 심리상담사와 임상심리사만을 채용하고
+                  있습니다.
+                </p>
+                <p>&nbsp;</p>
+                <p>
+                  기업 심리상담에 특화된 맞춤형 교육을 실시하고 있으며 매월
+                  정기적 사례회의를 통해 상담사의 역량을 제고하며, 만족도에 따른
+                  인센티브, 페널티를 제공하여 상담사분들이 주도적으로도 역량을
+                  관리할 수 있는 시스템도 구축했습니다.
+                </p>
+              </Accordion>
+              <Accordion title="회사나 동료들에게 상담내용이 알려지지는 않을까요?">
+                <p>
+                  상담실에서 상담사와 나누는 이야기는 모두 비밀보장이 됩니다.
+                </p>
+                <p>&nbsp;</p>
+                <p>
+                  상담내용은 도움이 필요로 하는 사람 즉 내담자와 상담사만 알 수
+                  있으며 기업관계자 등 제3자에게 상담내용은 절대 전달되지
+                  않습니다. 상담전문가들은 비밀보장에 대한 부분을 매우 중요한
+                  요소로 인식하고 있습니다.
+                </p>
+              </Accordion>
+            </FaqBox>
+          )}
+          {faqNum === 3 && (
+            <FaqBox>
+              <Accordion title="심리상담, 정신이 이상한 사람이 받는 것 아닌가요?">
+                <p>
+                  아닙니다! 심리상담은 마음의 문제로 고민하는 사람이거나 더 나은
+                  성장을 기대하는 '누구나' 받을 수 있습니다.
+                </p>
+                <p>&nbsp;</p>
+                <p>
+                  건강한 사람이라도 살다 보면 어려운 상황이 다가올 때가
+                  있습니다. 스스로 해결할 수도 있지만, 전문가의 도움이 있다면 더
+                  빠르게 그 상황을 헤쳐 나올 수 있습니다. 자신의 얘기에 귀
+                  기울이는 누군가를 만났을 때 마음이 한결 가벼워지는 경험을
+                  해보았을 것입니다. 상담전문가들이 여러분의 이야기에 귀
+                  기울이고 공감하며 상담받는 이의 입장에서 도움을 줄 수
+                  있습니다. 그렇기에 정상인들도 심리상담을 받습니다.
+                </p>
+              </Accordion>
+              <Accordion title="회사에서 직원들을 위해 심리상담제도를 운영하는 이유는 무엇인가요?">
+                <p>
+                  흔히 개인의 문제와 회사에서의 직무 스트레스가 분리되어 있지
+                  않을 때가 많습니다.
+                </p>
+                <p>&nbsp;</p>
+                <p>
+                  따라서 마인드카페의 심리상담은 업무와 연관된 문제뿐만 아니라
+                  개인이 가진 어려움까지도 다룰 수 있도록 합니다.
+                </p>
+                <p>&nbsp;</p>
+                <p>
+                  직장인들은 아침부터 저녁까지 회사 일에 집중하며, 심리적으로
+                  업무 스트레스가 높습니다. 업무에 집중하다 보면 가정을 제대로
+                  돌보지 못하면서 배우자의 관계나 자녀 양육에 어려움을 겪게 될
+                  때가 많습니다. 스트레스를 감내하던 중, 상담실 문을 두드리는
+                  분들을 많이 봤습니다. 특히 야근이나 술자리로 귀가 시간이
+                  늦어지며 부부관계가 삐걱거리고, 이혼 얘기까지 오가며, 드물게는
+                  자살로 이어질 때도 있습니다. 일상이 직장 생활에, 그리고 직장
+                  생활이 일상에 영향을 주는 것이 현실입니다.
+                </p>
+                <p>&nbsp;</p>
+                <p>
+                  직장 내 직무 스트레스와 가족문제는 각기 다른 문제가 아닙니다.
+                  마인드카페는 직원이 느끼는 가정문제나 직무 스트레스 해소할 수
+                  있도록, 심리상담 제도에 적극적인 태도를 취하고 있습니다.
+                </p>
+              </Accordion>
+              <Accordion title="어떤 내용으로 주로 상담 받나요?">
+                <p>
+                  개인적인 차원과 직장 내 문제 차원으로 나누어질 수 있습니다.
+                </p>
+                <p>&nbsp;</p>
+                <p>
+                  개인적인 차원에서는 자신과 대인관계, 가정, 일상생활에서의
+                  어려움과 외상 후 스트레스 등을 주제로 상담을 진행합니다. 가령
+                  자신의 성격 이해, 대인관계 양식 탐색, 감정 조절 어려움에 대한
+                  이해 및 해결, 가정문제에 대한 어려움(부부관계 및 자녀양육 등)
+                  해결, 일상생활에서 스트레스, 삶에서 충격적인 경험을 하고 난 후
+                  겪는 심리적인 후유증과 같은 주제가 있습니다. 위 주제에 대해
+                  심리적 이해 및 정리, 정서적인 해소, 새로운 삶에 대한 생활 방식
+                  및 관계 방식 변화를 위한 상담이 진행될 수 있습니다. 또한 우울
+                  불안, 성격장애와 같은 심각한 정신건강과 관련된 부분에 대한
+                  진단 및 상담도 포함됩니다.
+                  <br />
+                  직장 내 문제 차원으로는 동료 상사와의 갈등 해결, 업무상에서
+                  겪는 스트레스 관리, 경력관리 및 진로에 대한 탐색, 조직에서
+                  겪는 다양한 어려움과 갈등 조절을 위한 상담이 진행됩니다.
+                  그리고 입사, 승진, 평가, 휴직/복직, 퇴직, 조직개편, 팀
+                  전환(전배), 권고사직, 기타 사건 사고 등 HR의 주요 이슈와
+                  관련해서 직원들이 겪게 되는 스트레스, 갈등, 적응에 대한
+                  심리상담도 직장 내 문제 차원 상담의 한 영역입니다.
+                  <br />
+                  세월호, 경주 포항 지진, 화재, 교통사고 등 외상적 경험을 하거나
+                  혹은 이를 목격하는 간접적 외상경험도 심리적 상처를 남겨
+                  현실적응을 어렵게 만듭니다. 따라서 이러한 외상후 스트레스
+                  장애에 대해서도 상담을 받는것이 일반화 되고 있습니다.
+                  <br />
+                  또한 드러나는 증상이 있어서가 아니라 자기 스스로를 알고
+                  성장하기 위해 상담을 찾기도 합니다. 일반적으로 사람들은 자기
+                  스스로에 대해서 잘 알고 있다고 생각하지만, 꼭 그렇지만은
+                  않습니다. 타인은 알지만 자신이 알지 못하는 영역도 있고, 타인도
+                  모르고 자신도 모르는 영역이 존재합니다. 따라서 상담을 통해서
+                  자신을 인식하게 되면 시야가 더 확장되는 경험을 하게 되고 이는
+                  대인관계, 회사에서의 업무 등에서 도움을 받을 수 있습니다.
+                </p>
+              </Accordion>
+            </FaqBox>
+          )}
+          <div className="flex_center">
+            <PageButtonBox className="flex_center">
+              <PrevArrows onClickPrev={eventPrev}></PrevArrows>
+              <PageButton onClick={() => pageChange(1)}>1</PageButton>
+              <PageButton onClick={() => pageChange(2)}>2</PageButton>
+              <PageButton onClick={() => pageChange(3)}>3</PageButton>
+              <NextArrows onClickNext={eventNext}></NextArrows>
+            </PageButtonBox>
+          </div>
+        </InnerBox>
+      </Article>
+
+      <Article>
+        <Experience>
+          <InnerBox>
+            <ExperBox>
+              <p className="exper">당신의 든든한 EAP 파트너</p>
+              <p className="exper_sub">
+                마인드카페 EAP는 최적화된 프로그램으로
+                <br />
+                기업과 직원의 성장을 지원합니다.
+              </p>
+              <ExperButton>무료 견적 받아보기</ExperButton>
+            </ExperBox>
+          </InnerBox>
+          {windowWidth > 1060 && (
+            <ExperienceImg src="https://eap.mindcafe.co.kr/images/main/section-11-graphic-01.png" />
+          )}
+        </Experience>
+      </Article>
     </div>
   );
 };
