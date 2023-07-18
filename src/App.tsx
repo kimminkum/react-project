@@ -5,6 +5,7 @@ import "./App.css";
 import Header from "./routes/Header";
 import Footer from "./routes/Footer";
 import Main from "./routes/Main";
+import Nav from "./components/Nav";
 
 function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -49,9 +50,9 @@ function App() {
           </Routes>
         )}
 
-        {/* {isNavToggle && (
+        {isNavToggle && (
           <Nav isNavToggle={isNavToggle} onToggle={handleToggle}></Nav>
-        )} */}
+        )}
         <Footer onToggle={handleToggle} windowWidth={windowWidth} />
       </BrowserRouter>
     </div>
