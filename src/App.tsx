@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import logo from "./logo.svg";
 import "./App.css";
 import Header from "./routes/Header";
 import Footer from "./routes/Footer";

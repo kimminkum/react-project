@@ -125,9 +125,9 @@ const Header: React.FC<HeaderProps> = ({ windowWidth, onToggle }) => {
                 </PcnavList>
               </Pcnav>
             </div> */}
-            <BarBox className="flex_end" onClick={onToggle}>
+            {/* <BarBox className="flex_end" onClick={onToggle}>
               <FontAwesomeIcon icon={faBars} />
-            </BarBox>
+            </BarBox> */}
           </InnerBox>
         </HeaderPc>
       )}
@@ -140,9 +140,9 @@ const Header: React.FC<HeaderProps> = ({ windowWidth, onToggle }) => {
               </div>
             </Link>
 
-            <BarBox className="flex_end" onClick={onToggle}>
+            {/* <BarBox className="flex_end" onClick={onToggle}>
               <FontAwesomeIcon icon={faBars} />
-            </BarBox>
+            </BarBox> */}
           </InnerBoxMb>
         </HeaderMb>
       )}
